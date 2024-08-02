@@ -2,14 +2,74 @@
 import Layout from "../layouts/Layout.astro";
 ---
 
-<Layout title="Home">
-  <main id="main-content">
-    <section id="hero">
-      <h1>Hello there</h1>
-      <img
-        src="https://static.wikia.nocookie.net/starwars/images/2/2a/He-says-the-thing.png"
-        alt="General Kenobi"
-      />
-    </section>
+<Layout title="Coming Soon - GDG Guayaquil">
+  <main class="h-screen flex flex-col justify-center items-center bg-black text-white font-mono">
+    <h1 id="comingSoon" class="text-5xl mb-8 h-20"></h1>
+    <h1 id="gdgGuayaquil" class="text-6xl h-24"></h1>
   </main>
 </Layout>
+
+<style>
+  @keyframes blink {
+    0%, 100% { border-right-color: transparent }
+    50% { border-right-color: white }
+  }
+
+  h1 {
+    border-right: 0.08em solid white;
+    animation: blink 0.7s step-end infinite;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+
+  @keyframes fadeInOut {
+    0%, 100% { opacity: 0; }
+    50% { opacity: 1; }
+  }
+</style>
+
+<script>
+  const typeWriter = (element: HTMLElement, text: string, speed: number): Promise<void> => {
+    return new Promise((resolve) => {
+      let i = 0;
+      element.textContent = '';
+      element.style.animation = 'none';
+      
+      const typing = setInterval(() => {
+        if (i < text.length) {
+          element.textContent += text.charAt(i);
+          i++;
+        } else {
+          clearInterval(typing);
+          resolve();
+        }
+      }, speed);
+    });
+  };
+
+  const fadeOut = (element: HTMLElement): Promise<void> => {
+    return new Promise((resolve) => {
+      element.style.animation = 'fadeInOut 2s forwards';
+      setTimeout(resolve, 2000);
+    });
+  };
+
+  const animateText = async (element: HTMLElement, text: string, speed: number, delay: number): Promise<void> => {
+    while (true) {
+      await typeWriter(element, text, speed);
+      await new Promise(resolve => setTimeout(resolve, delay));
+      await fadeOut(element);
+      await new Promise(resolve => setTimeout(resolve, delay));
+    }
+  };
+
+  const comingSoon = document.getElementById('comingSoon') as HTMLElement;
+  const gdgGuayaquil = document.getElementById('gdgGuayaquil') as HTMLElement;
+
+  if (comingSoon && gdgGuayaquil) {
+    animateText(comingSoon, 'Coming Soon', 100, 1000);
+    setTimeout(() => {
+      animateText(gdgGuayaquil, 'GDG Guayaquil', 100, 1000);
+    }, 3000);
+  }
+</script>

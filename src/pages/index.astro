@@ -3,9 +3,12 @@ import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout title="Coming Soon - GDG Guayaquil">
-  <main class="h-screen flex flex-col justify-center items-center bg-black text-white font-mono p-4">
+  <main class="h-screen flex flex-col justify-center items-center bg-black text-white font-mono p-4 relative">
     <h1 id="comingSoon" class="text-3xl sm:text-4xl md:text-5xl mb-4 sm:mb-6 md:mb-8 h-16 sm:h-18 md:h-20 overflow-hidden"></h1>
     <h1 id="gdgGuayaquil" class="text-4xl sm:text-5xl md:text-6xl h-20 sm:h-22 md:h-24 overflow-hidden"></h1>
+    <footer class="absolute bottom-4 text-sm sm:text-base opacity-70 hover:opacity-100 transition-opacity duration-300">
+      With <span class="text-red-500">❤️</span> by <a href="https://github.com/codediaz" target="_blank" rel="noopener noreferrer" class="underline hover:text-blue-400 transition-colors duration-300">@codediaz</a>
+    </footer>
   </main>
 </Layout>
 
@@ -26,7 +29,6 @@ import Layout from "../layouts/Layout.astro";
     50% { opacity: 1; }
   }
 </style>
-
 <script>
   const typeWriter = (element: HTMLElement, text: string, speed: number): Promise<void> => {
     return new Promise((resolve) => {

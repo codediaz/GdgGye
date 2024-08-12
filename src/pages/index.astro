@@ -63,13 +63,15 @@ import Layout from "../layouts/Layout.astro";
     }
   };
 
-  const comingSoon = document.getElementById('comingSoon') as HTMLElement;
-  const gdgGuayaquil = document.getElementById('gdgGuayaquil') as HTMLElement;
+  document.addEventListener('DOMContentLoaded', () => {
+    const comingSoon = document.getElementById('comingSoon') as HTMLElement;
+    const gdgGuayaquil = document.getElementById('gdgGuayaquil') as HTMLElement;
 
-  if (comingSoon && gdgGuayaquil) {
-    animateText(comingSoon, 'Coming Soon', 100, 1000);
-    setTimeout(() => {
-      animateText(gdgGuayaquil, 'GDG Guayaquil', 100, 1000);
-    }, 3000);
-  }
+    if (comingSoon && gdgGuayaquil) {
+      animateText(comingSoon, 'Coming Soon', 100, 1000);
+      setTimeout(() => {
+        animateText(gdgGuayaquil, 'GDG Guayaquil', 100, 1000);
+      }, 3000);
+    }
+  });
 </script>

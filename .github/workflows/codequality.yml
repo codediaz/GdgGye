@@ -1,0 +1,27 @@
+name: Code Quality
+
+on: [push, pull_request]
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "20"
+          cache: "pnpm"
+
+      - name: Install dependencies
+        run: pnpm i --frozen-lockfile
+
+      - name: Check lint and format
+        run: pnpm biome ci ./src/ --reporter=github
+
+      - name: Type check
+        run: pnpm run typecheck
+
+      - name: Build check
+        run: pnpm run build

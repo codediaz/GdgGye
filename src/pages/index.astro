@@ -29,16 +29,7 @@ import Layout from "../layouts/Layout.astro";
 </style>
 
 <script>
-  // Este script verifica si hay una redirección de 404 y la maneja
-  (function() {
-    var redirect = sessionStorage.redirect;
-    delete sessionStorage.redirect;
-    if (redirect && redirect != location.href) {
-      history.replaceState(null, null, redirect);
-    }
-  })();
-
-  const typeWriter = (element, text, speed) => {
+  const typeWriter = (element: HTMLElement, text: string, speed: number): Promise<void> => {
     return new Promise((resolve) => {
       let i = 0;
       element.textContent = '';
@@ -56,14 +47,14 @@ import Layout from "../layouts/Layout.astro";
     });
   };
 
-  const fadeOut = (element) => {
+  const fadeOut = (element: HTMLElement): Promise<void> => {
     return new Promise((resolve) => {
       element.style.animation = 'fadeInOut 2s forwards';
       setTimeout(resolve, 2000);
     });
   };
 
-  const animateText = async (element, text, speed, delay) => {
+  const animateText = async (element: HTMLElement, text: string, speed: number, delay: number): Promise<void> => {
     while (true) {
       await typeWriter(element, text, speed);
       await new Promise(resolve => setTimeout(resolve, delay));
@@ -73,8 +64,8 @@ import Layout from "../layouts/Layout.astro";
   };
 
   document.addEventListener('DOMContentLoaded', () => {
-    const comingSoon = document.getElementById('comingSoon');
-    const gdgGuayaquil = document.getElementById('gdgGuayaquil');
+    const comingSoon = document.getElementById('comingSoon') as HTMLElement;
+    const gdgGuayaquil = document.getElementById('gdgGuayaquil') as HTMLElement;
 
     if (comingSoon && gdgGuayaquil) {
       animateText(comingSoon, 'Coming Soon', 100, 1000);

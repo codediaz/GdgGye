@@ -2,12 +2,12 @@ import mdx from "@astrojs/mdx";
 import { defineConfig } from "astro/config";
 import rehypeMinifyHtml from "rehype-preset-minify";
 import remarkToc from "remark-toc";
-
 import tailwind from "@astrojs/tailwind";
 
-// https://astro.build/config
 export default defineConfig({
-  site: 'https://codediaz.github.io/GdgGye',
+  site: 'https://codediaz.github.io',
+  base: '/GdgGye',
+  output: 'static',
   image: {
     domains: ["static.wikia.nocookie.net"],
   },
@@ -24,4 +24,7 @@ export default defineConfig({
       gfm: false,
     }),
   ],
+  build: {
+    assets: 'astro'
+  }
 });
